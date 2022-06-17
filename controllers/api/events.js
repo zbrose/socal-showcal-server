@@ -1,11 +1,11 @@
+require('dotenv').config()
 const router = require('express').Router()
-const db = require('../models')
-module.exports = router
-
+const db = require('../../models')
+const requiresToken = require('../requiresToken')
 
 router.get('/', async (req, res)=>{
     try {
-        const events = await db.Event.find()
+        const events = await db.Event.find().populate('user')
         res.json(events)
     }catch (error) {
         console.log(error)
@@ -21,8 +21,11 @@ router.get('/:id', async (req,res)=>{
     }
 })
 
-router.post('/new', async (req,res)=>{
+router.post('/new', requiresToken, async (req,res) => {
     try {
+        const foundUser = await db.User.findOne({
+            _id: res.locals.user._id
+        })
         const createdEvent = await db.Event.create({
             title: req.body.title,
             date: req.body.date,
@@ -35,12 +38,16 @@ router.post('/new', async (req,res)=>{
             genre: req.body.genre,
             details: req.body.details
         }) 
+        
+        foundUser.events.push(createdEvent)
+        createdEvent.user.push(foundUser)
+        createdEvent.save()
+        foundUser.save()
         res.send(createdEvent)
     } catch (error){
         console.log(error)
     }
 })
-
 
 router.put('/:id/edit', async (req,res)=>{
     try {
@@ -55,9 +62,13 @@ router.put('/:id/edit', async (req,res)=>{
 
 router.delete('/:id', async (req,res)=>{
     try {
+        await db.User.updateMany({ $pull: { events: req.params.id } })
         await db.Event.findByIdAndDelete(req.params.id)
         res.status(204).json({message: 'event deleted from the database'})
     }catch (error) {
         console.log(error)
     }
 })
+
+module.exports = router
+

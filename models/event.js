@@ -10,7 +10,8 @@ const eventSchema = new mongoose.Schema({
     zipcode: Number,
     cover: Number,
     genre: String,
-    details: String
+    details: String,
+    user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 })
 
 module.exports = mongoose.model('Event', eventSchema)

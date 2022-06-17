@@ -13,3 +13,4 @@ db.on('error',(err)=>{
 })
 
 module.exports.Event = require('./event')
+module.exports.User = require('./user')
