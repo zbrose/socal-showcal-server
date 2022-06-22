@@ -30,12 +30,15 @@ router.post('/new', requiresToken, async (req,res) => {
             title: req.body.title,
             date: req.body.date,
             time: req.body.time,
+            venue: req.body.venue,
             address: req.body.address,
+            otherAddress: req.body.otherAddress,
             city: req.body.city,
             state: req.body.state,
             zipcode: req.body.zipcode,
             cover: req.body.cover,
-            genre: req.body.genre,
+            // genre: req.body.genre,
+            link: req.body.link,
             details: req.body.details
         }) 
         
