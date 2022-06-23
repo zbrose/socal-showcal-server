@@ -6,6 +6,7 @@ const eventSchema = new mongoose.Schema({
     time: String,
     venue: String,
     address: String,
+    customVenueName: String,
     otherAddress: String,
     city: String,
     state: String,
@@ -14,6 +15,7 @@ const eventSchema = new mongoose.Schema({
     genre: String,
     link: String,
     details: String,
+    color: String,
     user: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 })
 

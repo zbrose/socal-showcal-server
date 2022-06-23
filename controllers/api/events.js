@@ -32,6 +32,7 @@ router.post('/new', requiresToken, async (req,res) => {
             time: req.body.time,
             venue: req.body.venue,
             address: req.body.address,
+            customVenueName: req.body.customVenueName,
             otherAddress: req.body.otherAddress,
             city: req.body.city,
             state: req.body.state,
@@ -39,7 +40,9 @@ router.post('/new', requiresToken, async (req,res) => {
             cover: req.body.cover,
             // genre: req.body.genre,
             link: req.body.link,
-            details: req.body.details
+            details: req.body.details,
+            color: req.body.color
+
         }) 
         
         foundUser.events.push(createdEvent)
