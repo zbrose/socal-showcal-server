@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/events'
+
 //connect to the db uri
-mongoose.connect('mongodb://localhost/events')
+mongoose.connect(MONGODB_URI)
 //grab the db connection
 const db = mongoose.connection
 //have some callback messages on connection
