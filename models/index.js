@@ -1,16 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
+const uri =
+  "mongodb+srv://zbrose:XfrJFcKiUnDQMpuS@showcal-db.gorin.mongodb.net/events";
 //connect to the db uri
-mongoose.connect('mongodb://localhost/events')
+mongoose.connect(uri);
 //grab the db connection
-const db = mongoose.connection
+const db = mongoose.connection;
 //have some callback messages on connection
-db.once('open',()=>{
-    console.log(`mongoose connected @ ${db.host}:${db.host}`)
-})
-db.on('error',(err)=>{
-    console.log(err,'yo something so seriously WRONG')
-})
+db.once("open", () => {
+  console.log(`mongoose connected @ ${db.host}:${db.name}`);
+});
+db.on("error", (err) => {
+  console.log(err, "yo something so seriously WRONG");
+});
 
-module.exports.Event = require('./event')
-module.exports.User = require('./user')
+module.exports.Event = require("./event");
