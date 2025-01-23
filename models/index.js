@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri =
-  "mongodb+srv://zbrose:XfrJFcKiUnDQMpuS@showcal-db.gorin.mongodb.net/events";
+const uri = process.env.MONGO_CONNECTION_STRING;
 //connect to the db uri
 mongoose.connect(uri);
 //grab the db connection
