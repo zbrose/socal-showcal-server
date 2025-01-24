@@ -12,9 +12,11 @@ const db = mongoose.connection;
 //have some callback messages on connection
 db.once("open", () => {
   console.log(`mongoose connected @ ${db.host}:${db.name}`);
+  console.log("Registered Models:", Object.keys(mongoose.models));
 });
 db.on("error", (err) => {
   console.log(err, "yo something so seriously WRONG");
 });
 
 module.exports.Event = require("./event");
+module.exports.User = require("./user");
