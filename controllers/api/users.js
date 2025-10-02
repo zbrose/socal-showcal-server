@@ -71,10 +71,7 @@ router.post("/login", async (req, res) => {
     });
 
   // check the password from the req.body again the password in the db
-  const matchPasswords = await bcrypt.compare(
-    req.body.password,
-    foundUser.password
-  );
+  const matchPasswords = bcrypt.compare(req.body.password, foundUser.password);
   // console.log(matchPasswords)
 
   // if the provided info does not match -- send back an error message and return
