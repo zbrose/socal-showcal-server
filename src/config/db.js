@@ -1,5 +1,5 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+import "dotenv/config";
+import mongoose from "mongoose";
 
 const uri = process.env.MONGO_URI;
 if (!uri) {
@@ -17,6 +17,3 @@ db.once("open", () => {
 db.on("error", (err) => {
   console.log(err, "yo something so seriously WRONG");
 });
-
-module.exports.Event = require("./event");
-module.exports.User = require("./user");

@@ -1,6 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import "dotenv/config";
+import exporess from "express";
+import db from "./config/db.js";
+import cors from "cors";
+import eventRoutes from "./routes/eventRoutes.js";
 
 const app = express();
 
@@ -17,10 +19,10 @@ const myMiddleWare = (req, res, next) => {
 app.use(myMiddleWare);
 
 // Routes
-app.use("/events", require("./controllers/api/events"));
+app.use("/events", eventRoutes);
 app.use("/users", require("./controllers/api/users"));
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("Hello world");
 });
 
