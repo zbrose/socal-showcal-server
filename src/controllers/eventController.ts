@@ -52,7 +52,7 @@ export async function deleteEvent(req: Request, res: Response) {
     const id = req.params.id;
     if (!id) return res.status(400).json({ error: "Event id is required" });
     await eventService.deleteEvent(id);
-    res.status(204).json({ message: "Event deleted" });
+    res.status(204).send({ message: "Event deleted" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to delete event" });

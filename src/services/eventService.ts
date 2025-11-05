@@ -37,6 +37,6 @@ export const updateEvent = (
 };
 
 export const deleteEvent = async (id: string): Promise<void> => {
-  User.updateMany({ $pull: { events: id } });
-  Event.findByIdAndDelete(id);
+  await User.updateMany({ $pull: { events: id } });
+  await Event.findByIdAndDelete(id);
 };
