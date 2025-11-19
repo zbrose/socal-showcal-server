@@ -6,15 +6,11 @@ export interface IEvent extends Document {
   time: string;
   venue: string;
   address?: string;
-  customVenueName?: string;
-  otherAddress?: string;
-  city?: string;
-  state?: string;
-  zipcode?: string;
   cover?: string;
   link?: string;
   details?: string;
   color?: string;
+  customVenue?: string;
   user: Types.ObjectId[];
 }
 
@@ -24,15 +20,11 @@ const eventSchema = new Schema<IEvent>({
   time: String,
   venue: String,
   address: String,
-  customVenueName: String,
-  otherAddress: String,
-  city: String,
-  state: String,
-  zipcode: Number,
   cover: Number,
   link: String,
   details: String,
   color: String,
+  customVenue: String,
   user: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 

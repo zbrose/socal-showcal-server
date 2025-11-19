@@ -5,15 +5,11 @@ const eventSchema = new Schema({
     time: String,
     venue: String,
     address: String,
-    customVenueName: String,
-    otherAddress: String,
-    city: String,
-    state: String,
-    zipcode: Number,
     cover: Number,
     link: String,
     details: String,
     color: String,
+    customVenue: String,
     user: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 export const Event = model("Event", eventSchema);

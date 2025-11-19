@@ -1,5 +1,5 @@
 import "dotenv/config";
-import "./config/db.js";
+import { connectDB } from "./config/db.js";
 import express from "express";
 import cors from "cors";
 import eventRoutes from "./routes/eventRoutes.js";
@@ -32,6 +32,9 @@ app.use((err, req, res, next) => {
 });
 // Port Configuration and Server Startup
 const PORT = process.env.PORT || 8000;
+// Ensure database is connected before starting the server to avoid
+// mongoose buffering timeouts when the app serves requests immediately.
+await connectDB();
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
