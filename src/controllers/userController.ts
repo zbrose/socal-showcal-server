@@ -26,7 +26,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     if (existingUser)
       return res.status(409).json({
-        error:
+        message:
           "There is already a user with that email.  Please use a different one.",
       });
 

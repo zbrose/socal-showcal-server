@@ -21,7 +21,7 @@ export const createUser = async (req, res) => {
         const existingUser = await userService.getUserByEmail(email);
         if (existingUser)
             return res.status(409).json({
-                error: "There is already a user with that email.  Please use a different one.",
+                message: "There is already a user with that email.  Please use a different one.",
             });
         const hashedPassword = await authService.hashPassword(password);
         const createdUser = await userService.createUser({
