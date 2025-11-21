@@ -62,7 +62,6 @@ export const loginUser = async (req, res) => {
             id: foundUser._id,
         });
         res.json({ token, user: foundUser });
-        console.log(foundUser);
     }
     catch (err) {
         console.error("Login Error:", err);

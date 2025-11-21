@@ -83,7 +83,6 @@ export const loginUser = async (req: Request, res: Response) => {
     });
 
     res.json({ token, user: foundUser });
-    console.log(foundUser);
   } catch (err) {
     console.error("Login Error:", err);
     res.status(500).json({ error: "There was an error logging the user in" });
