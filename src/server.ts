@@ -1,6 +1,13 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import "dotenv/config";
+import { connectDB } from "./config/db.js";
+import express, {
+  type Request,
+  type Response,
+  type NextFunction,
+} from "express";
+import cors from "cors";
+import eventRoutes from "./routes/eventRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -10,17 +17,17 @@ app.use(express.json());
 app.use(cors());
 
 // Logging Middleware
-const myMiddleWare = (req, res, next) => {
+const myMiddleWare = (req: Request, res: Response, next: NextFunction) => {
   console.log(`[${new Date().toISOString()}] ${req.method} - ${req.url}`);
   next();
 };
 app.use(myMiddleWare);
 
 // Routes
-app.use("/events", require("./controllers/api/events"));
-app.use("/users", require("./controllers/api/users"));
+app.use("/events", eventRoutes);
+app.use("/users", userRoutes);
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("Hello world");
 });
 
@@ -30,13 +37,17 @@ app.use((req, res) => {
 });
 
 // Error Handling Middleware
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ error: "Something went wrong!" });
 });
 
 // Port Configuration and Server Startup
 const PORT = process.env.PORT || 8000;
+
+// Ensure database is connected before starting the server to avoid
+// mongoose buffering timeouts when the app serves requests immediately.
+await connectDB();
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
